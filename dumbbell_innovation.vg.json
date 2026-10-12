@@ -4,7 +4,7 @@
   "width": "container",
   "height": 230,
   "data": {
-    "url": "data/ai_by_size.csv",
+    "url": "ai_by_size.csv",
     "format": {
       "type": "csv",
       "parse": {"order": "number", "ai_innovation_active": "number", "ai_not_innovation_active": "number"}

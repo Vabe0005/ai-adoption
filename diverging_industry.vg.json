@@ -6,7 +6,7 @@
     "step": 24
   },
   "data": {
-    "url": "data/ict_by_industry.csv",
+    "url": "ict_by_industry.csv",
     "format": {
       "type": "csv",
       "parse": {

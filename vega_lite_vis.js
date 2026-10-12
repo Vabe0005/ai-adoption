@@ -22,13 +22,13 @@ var embedOptions = {actions: false, config: theme, renderer: "svg"};
 
 // [container id, spec file]
 var charts = [
-  ["#waffle_size", "js/waffle_size.vg.json"],
-  ["#dumbbell_innovation", "js/dumbbell_innovation.vg.json"],
-  ["#choropleth_states", "js/choropleth_states.vg.json"],
-  ["#tilemap_toolkit", "js/tilemap_toolkit.vg.json"],
-  ["#diverging_industry", "js/diverging_industry.vg.json"],
-  ["#heatmap_industry", "js/heatmap_industry.vg.json"],
-  ["#symbol_barriers", "js/symbol_barriers.vg.json"]
+  ["#waffle_size", "waffle_size.vg.json"],
+  ["#dumbbell_innovation", "dumbbell_innovation.vg.json"],
+  ["#choropleth_states", "choropleth_states.vg.json"],
+  ["#tilemap_toolkit", "tilemap_toolkit.vg.json"],
+  ["#diverging_industry", "diverging_industry.vg.json"],
+  ["#heatmap_industry", "heatmap_industry.vg.json"],
+  ["#symbol_barriers", "symbol_barriers.vg.json"]
 ];
 
 charts.forEach(function (chart) {

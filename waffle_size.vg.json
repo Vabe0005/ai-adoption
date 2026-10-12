@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Waffle charts: out of every 100 businesses of each size, how many used AI in 2024-25 (ABS).",
   "data": {
-    "url": "data/ai_by_size.csv",
+    "url": "ai_by_size.csv",
     "format": {"type": "csv", "parse": {"order": "number", "ai": "number"}}
   },
   "transform": [

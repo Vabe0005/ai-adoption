@@ -41,7 +41,7 @@
     ]
   },
   "data": {
-    "url": "data/ict_by_state.csv",
+    "url": "ict_by_state.csv",
     "format": {
       "type": "csv",
       "parse": {
@@ -71,7 +71,7 @@
       "lookup": "state",
       "from": {
         "data": {
-          "url": "js/australia_states.topojson",
+          "url": "australia_states.topojson",
           "format": {
             "type": "topojson",
             "feature": "states"

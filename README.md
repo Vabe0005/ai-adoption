@@ -2,17 +2,17 @@
 
 FIT3179 Data Visualisation 2 (Monash University, Semester 2 2026). Topic: Artificial Intelligence Adoption.
 
-**Live page:** https://YOUR-GITHUB-USERNAME.github.io/ai-adoption/
+**Live page:** https://vabe0005.github.io/ai-adoption/
 
 ## Files
 | Path | What it is |
 |---|---|
 | `index.html` | The web page (layout with Pure.css grids) |
-| `css/style.css` | Colours, typography and layout styles |
-| `js/vega_lite_vis.js` | Embeds every chart with `vegaEmbed` and sets the shared chart theme |
-| `js/*.vg.json` | One Vega-Lite specification per chart |
-| `js/australia_states.topojson` | State/territory boundaries (Natural Earth 1:50m, simplified) |
-| `data/*.csv` | Data extracted from the ABS data cube |
+| `style.css` | Colours, typography and layout styles |
+| `vega_lite_vis.js` | Embeds every chart with `vegaEmbed` and sets the shared chart theme |
+| `*.vg.json` | One Vega-Lite specification per chart |
+| `australia_states.topojson` | State/territory boundaries (Natural Earth 1:50m, simplified) |
+| `*.csv` | Data extracted from the ABS data cube |
 
 ## Charts
 | File | Idiom |

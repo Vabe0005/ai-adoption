@@ -7,14 +7,14 @@
   "layer": [
     {
       "data": {
-        "url": "js/australia_states.topojson",
+        "url": "australia_states.topojson",
         "format": {"type": "topojson", "feature": "states"}
       },
       "mark": {"type": "geoshape", "fill": "#ebe8f1", "stroke": "#ffffff", "strokeWidth": 1.2}
     },
     {
       "data": {
-        "url": "data/ict_by_state.csv",
+        "url": "ict_by_state.csv",
         "format": {
           "type": "csv",
           "parse": {
