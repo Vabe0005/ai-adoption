@@ -29,4 +29,4 @@ FIT3179 Data Visualisation 2 (Monash University, Semester 2 2026). Topic: Artifi
 - Australian Bureau of Statistics (2026), *Characteristics of Australian Business, 2024–25*, data cube 6, tables 2 and 4. CC BY 4.0.
 - Natural Earth, Admin 1 – States, Provinces (1:50m). Public domain.
 
-Author: [Your name], October 2026.
+Author: Vimuth Abeysinghe, October 2026.
