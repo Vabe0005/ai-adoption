@@ -1,0 +1,229 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Diverging bar chart: how far each industry's AI use sits above or below the all-business average of 12.1%, 2024-25 (ABS).",
+  "width": "container",
+  "height": {
+    "step": 24
+  },
+  "data": {
+    "url": "data/ict_by_industry.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "ai": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.ai - 12.1",
+      "as": "diff"
+    },
+    {
+      "calculate": "datum.diff >= 0 ? 'Above average' : 'Below average'",
+      "as": "side"
+    },
+    {
+      "calculate": "(datum.diff >= 0 ? '+' : '') + format(datum.diff, '.1f')",
+      "as": "diff_text"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadius": 3,
+        "height": {
+          "band": 0.7
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "diff",
+          "type": "quantitative",
+          "title": "Percentage points above / below the 12.1% average",
+          "scale": {
+            "domain": [
+              -14,
+              28
+            ]
+          },
+          "axis": {
+            "grid": true,
+            "tickCount": 8
+          }
+        },
+        "color": {
+          "field": "side",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Above average",
+              "Below average"
+            ],
+            "range": [
+              "#6a3fd6",
+              "#c9a77c"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "industry_full",
+            "title": "Industry"
+          },
+          {
+            "field": "ai",
+            "title": "% using AI",
+            "format": ".1f"
+          },
+          {
+            "field": "diff_text",
+            "title": "vs average (pts)"
+          }
+        ],
+        "y": {
+          "field": "industry",
+          "type": "nominal",
+          "sort": {
+            "field": "diff",
+            "op": "max",
+            "order": "descending"
+          },
+          "title": null,
+          "axis": {
+            "domain": false,
+            "ticks": false,
+            "labelFontSize": 12,
+            "labelPadding": 8
+          }
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.diff >= 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "align": "left",
+        "dx": 5,
+        "color": "#4a4458"
+      },
+      "encoding": {
+        "y": {
+          "field": "industry",
+          "type": "nominal",
+          "sort": {
+            "field": "diff",
+            "op": "max",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "diff",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "ai",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.diff < 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "align": "right",
+        "dx": -5,
+        "color": "#4a4458"
+      },
+      "encoding": {
+        "y": {
+          "field": "industry",
+          "type": "nominal",
+          "sort": {
+            "field": "diff",
+            "op": "max",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "diff",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "ai",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 0
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#1e1b2e",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 0,
+            "label": "Average: 12.1% of all businesses"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "top",
+        "dx": -6,
+        "dy": 4,
+        "fontStyle": "italic",
+        "fontSize": 11,
+        "color": "#1e1b2e",
+        "y": 0
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+state,abbr,lon,lat,tile_col,tile_row,ai,cloud,digital_platforms,crm,iot,data_analytics,barrier_skills,barrier_funds,barrier_cost_benefit,barrier_understanding,any_barrier,label_lon,label_lat
+New South Wales,NSW,147.0,-32.2,2,1,12.7,71.8,61.1,17.3,7,5.8,15.5,12.1,12.6,10.2,36,147.0,-32.2
+Victoria,VIC,144.3,-36.9,2,2,13.1,69.1,63.3,17.9,8.4,5.5,16,14.1,14.6,12.4,39.1,144.3,-36.9
+Queensland,QLD,144.6,-22.6,2,0,11.6,74.9,67.3,19.1,7.7,4.4,17.6,13.9,14,14.4,37.5,144.6,-22.6
+South Australia,SA,135.6,-30.2,1,1,8.4,77.6,63.4,17.4,6.3,4.2,15.2,13,17.3,13.5,41,135.6,-30.2
+Western Australia,WA,122.2,-25.6,0,1,9.8,77.8,68.8,16.4,7.6,4.6,18.7,7.9,9.6,12.1,35.3,122.2,-25.6
+Tasmania,TAS,146.6,-42.0,2,3,17.2,76.6,63.6,13.5,10.8,6.3,15,8.9,15.5,12.8,34.2,146.6,-42.0
+Northern Territory,NT,133.4,-19.4,1,0,17.8,84.2,68.3,24.4,9.3,6.7,18.4,11.6,19.2,16.7,45.2,133.4,-19.4
+Australian Capital Territory,ACT,149.0,-35.5,3,1,8.6,74.2,55.1,12.6,6,3.2,12,13.2,11.5,8.5,27,152.6,-37.4

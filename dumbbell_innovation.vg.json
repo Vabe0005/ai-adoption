@@ -1,0 +1,102 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dumbbell chart: AI use among innovation-active vs non-innovation-active businesses, by business size, 2024-25 (ABS).",
+  "width": "container",
+  "height": 230,
+  "data": {
+    "url": "data/ai_by_size.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"order": "number", "ai_innovation_active": "number", "ai_not_innovation_active": "number"}
+    }
+  },
+  "transform": [
+    {"calculate": "datum.size + ' (' + datum.staff + ')'", "as": "label"},
+    {"calculate": "datum.ai_innovation_active - datum.ai_not_innovation_active", "as": "gap"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "label",
+      "type": "nominal",
+      "sort": {"field": "order"},
+      "title": null,
+      "axis": {"labelFontSize": 13, "domain": false, "ticks": false, "labelPadding": 10}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "rule", "strokeWidth": 4, "color": "#cfc8e3"},
+      "encoding": {
+        "x": {
+          "field": "ai_not_innovation_active",
+          "type": "quantitative",
+          "scale": {"domain": [0, 45]},
+          "title": "% of businesses using AI",
+          "axis": {"grid": true, "tickCount": 5}
+        },
+        "x2": {"field": "ai_innovation_active"},
+        "tooltip": [
+          {"field": "label", "title": "Business size"},
+          {"field": "gap", "title": "Gap (percentage points)"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"fold": ["ai_not_innovation_active", "ai_innovation_active"], "as": ["group", "pct"]},
+        {
+          "calculate": "datum.group == 'ai_innovation_active' ? 'Innovating businesses' : 'Non-innovating businesses'",
+          "as": "group_label"
+        }
+      ],
+      "mark": {"type": "circle", "size": 220, "opacity": 1},
+      "encoding": {
+        "x": {"field": "pct", "type": "quantitative"},
+        "color": {
+          "field": "group_label",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Non-innovating businesses", "Innovating businesses"],
+            "range": ["#a59fb5", "#6a3fd6"]
+          },
+          "legend": {"title": null, "orient": "top", "direction": "horizontal"}
+        },
+        "tooltip": [
+          {"field": "label", "title": "Business size"},
+          {"field": "group_label", "title": "Group"},
+          {"field": "pct", "title": "% using AI"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"fold": ["ai_not_innovation_active", "ai_innovation_active"], "as": ["group", "pct"]}
+      ],
+      "mark": {"type": "text", "dy": -16, "fontSize": 12, "fontWeight": 600},
+      "encoding": {
+        "x": {"field": "pct", "type": "quantitative"},
+        "text": {"field": "pct", "type": "quantitative", "format": ".0f"},
+        "color": {
+          "condition": {"test": "datum.group == 'ai_innovation_active'", "value": "#4b2aa0"},
+          "value": "#7c768c"
+        }
+      }
+    },
+    {
+      "transform": [{"filter": "datum.size == 'Small'"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 14,
+        "dy": 1,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#4b2aa0"
+      },
+      "encoding": {
+        "x": {"field": "ai_innovation_active", "type": "quantitative"},
+        "text": {"value": "Almost 5× more likely"}
+      }
+    }
+  ]
+}

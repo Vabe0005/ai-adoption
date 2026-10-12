@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Waffle charts: out of every 100 businesses of each size, how many used AI in 2024-25 (ABS).",
+  "data": {
+    "url": "data/ai_by_size.csv",
+    "format": {"type": "csv", "parse": {"order": "number", "ai": "number"}}
+  },
+  "transform": [
+    {"calculate": "sequence(0, 100)", "as": "cell"},
+    {"flatten": ["cell"]},
+    {"calculate": "datum.cell % 10", "as": "col"},
+    {"calculate": "floor(datum.cell / 10)", "as": "row"},
+    {
+      "calculate": "datum.cell < round(datum.ai) ? 'Uses AI' : 'Does not use AI'",
+      "as": "status"
+    },
+    {
+      "calculate": "datum.size + ' (' + datum.staff + ')|' + round(datum.ai) + ' in 100 use AI'",
+      "as": "header"
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "header",
+      "type": "nominal",
+      "sort": {"field": "order", "op": "min"},
+      "title": null,
+      "header": {
+        "labelExpr": "split(datum.value, '|')",
+        "labelFontSize": 13,
+        "labelFontWeight": 600,
+        "labelLineHeight": 18,
+        "labelPadding": 8
+      }
+    }
+  },
+  "spacing": 28,
+  "spec": {
+    "width": 118,
+    "height": 118,
+    "mark": {"type": "square", "size": 82},
+    "encoding": {
+      "x": {"field": "col", "type": "ordinal", "axis": null},
+      "y": {"field": "row", "type": "ordinal", "axis": null, "sort": "descending"},
+      "color": {
+        "field": "status",
+        "type": "nominal",
+        "scale": {
+          "domain": ["Uses AI", "Does not use AI"],
+          "range": ["#6a3fd6", "#dcd8e6"]
+        },
+        "legend": {"title": null, "orient": "top", "direction": "horizontal"}
+      },
+      "tooltip": [
+        {"field": "size", "title": "Business size"},
+        {"field": "staff", "title": "Staff"},
+        {"field": "ai", "title": "% using AI", "format": ".1f"}
+      ]
+    }
+  }
+}

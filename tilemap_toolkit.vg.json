@@ -1,0 +1,254 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Tile-grid map (cartogram): each state/territory is an equal-sized tile placed roughly where it sits on the map. Mini bars inside show the % of businesses using six digital technologies; AI is highlighted. 2024-25 (ABS).",
+  "width": 460,
+  "height": 460,
+  "data": {
+    "url": "data/ict_by_state.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "tile_col": "number",
+        "tile_row": "number",
+        "ai": "number",
+        "cloud": "number",
+        "digital_platforms": "number",
+        "crm": "number",
+        "iot": "number",
+        "data_analytics": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.tile_col * 1.1",
+      "as": "tx0"
+    },
+    {
+      "calculate": "datum.tx0 + 1",
+      "as": "tx1"
+    },
+    {
+      "calculate": "datum.tile_row * 1.1",
+      "as": "ty0"
+    },
+    {
+      "calculate": "datum.ty0 + 1",
+      "as": "ty1"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "fill": "#f1eef7",
+        "stroke": "#d8d2e6",
+        "cornerRadius": 6
+      },
+      "encoding": {
+        "x": {
+          "field": "tx0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              4.3
+            ]
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "tx1"
+        },
+        "y": {
+          "field": "ty0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              4.3
+            ],
+            "reverse": true
+          },
+          "axis": null
+        },
+        "y2": {
+          "field": "ty1"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "cloud",
+            "digital_platforms",
+            "crm",
+            "ai",
+            "iot",
+            "data_analytics"
+          ],
+          "as": [
+            "tech",
+            "pct"
+          ]
+        },
+        {
+          "calculate": "indexof(['cloud', 'digital_platforms', 'crm', 'ai', 'iot', 'data_analytics'], datum.tech)",
+          "as": "i"
+        },
+        {
+          "calculate": "['Cloud technology', 'Digital platforms', 'CRM software', 'Artificial intelligence', 'Internet of Things', 'Data analytics'][datum.i]",
+          "as": "tech_label"
+        },
+        {
+          "calculate": "datum.tx0 + 0.09 + datum.i * 0.14",
+          "as": "bx0"
+        },
+        {
+          "calculate": "datum.bx0 + 0.11",
+          "as": "bx1"
+        },
+        {
+          "calculate": "datum.ty0 + 0.9",
+          "as": "by0"
+        },
+        {
+          "calculate": "datum.by0 - datum.pct / 100 * 0.6",
+          "as": "by1"
+        },
+        {
+          "calculate": "datum.tech == 'ai' ? 'Artificial intelligence' : 'Other digital technologies'",
+          "as": "group"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "cornerRadiusTopLeft": 1.5,
+        "cornerRadiusTopRight": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "bx0",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "bx1"
+        },
+        "y": {
+          "field": "by0",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "by1"
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Artificial intelligence",
+              "Other digital technologies"
+            ],
+            "range": [
+              "#6a3fd6",
+              "#b9b3c7"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "tech_label",
+            "title": "Technology"
+          },
+          {
+            "field": "pct",
+            "title": "% of businesses",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#1e1b2e",
+        "dx": 0,
+        "dy": 0
+      },
+      "transform": [
+        {
+          "calculate": "datum.tx0 + 0.08",
+          "as": "lx"
+        },
+        {
+          "calculate": "datum.ty0 + 0.06",
+          "as": "ly"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "lx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "abbr"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "top",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "color": "#6a3fd6"
+      },
+      "transform": [
+        {
+          "calculate": "datum.tx1 - 0.07",
+          "as": "lx"
+        },
+        {
+          "calculate": "datum.ty0 + 0.07",
+          "as": "ly"
+        },
+        {
+          "calculate": "'AI ' + format(datum.ai, '.0f') + '%'",
+          "as": "ai_text"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "lx",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ly",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "ai_text"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+size,staff,order,ai,ai_innovation_active,ai_not_innovation_active
+Micro,0–4 staff,1,10.7,18,6
+Small,5–19 staff,2,12.3,19,4
+Medium,20–199 staff,3,22.3,28,13
+Large,200+ staff,4,34.7,37,29

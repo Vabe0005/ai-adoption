@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Proportional symbol map: circle area = % of businesses reporting anything that limited their use of digital technology; colour = the most common barrier in that state/territory, 2024-25 (ABS).",
+  "width": "container",
+  "height": 420,
+  "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-132, 0]},
+  "layer": [
+    {
+      "data": {
+        "url": "js/australia_states.topojson",
+        "format": {"type": "topojson", "feature": "states"}
+      },
+      "mark": {"type": "geoshape", "fill": "#ebe8f1", "stroke": "#ffffff", "strokeWidth": 1.2}
+    },
+    {
+      "data": {
+        "url": "data/ict_by_state.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "lon": "number", "lat": "number", "label_lon": "number", "label_lat": "number",
+            "barrier_skills": "number", "barrier_funds": "number",
+            "barrier_cost_benefit": "number", "barrier_understanding": "number",
+            "any_barrier": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "max(datum.barrier_skills, datum.barrier_funds, datum.barrier_cost_benefit, datum.barrier_understanding)",
+          "as": "top_pct"
+        },
+        {
+          "calculate": "datum.top_pct == datum.barrier_skills ? 'Not enough staff skills' : datum.top_pct == datum.barrier_cost_benefit ? 'Unsure it is worth the cost' : datum.top_pct == datum.barrier_funds ? 'Not enough funds' : 'Unsure what technology they need'",
+          "as": "top_barrier"
+        }
+      ],
+      "layer": [
+        {
+          "transform": [{"filter": "datum.abbr == 'ACT'"}],
+          "mark": {"type": "rule", "color": "#6b6578", "strokeWidth": 1},
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "longitude2": {"field": "label_lon"},
+            "latitude2": {"field": "label_lat"}
+          }
+        },
+        {
+          "mark": {"type": "circle", "opacity": 0.88, "stroke": "#ffffff", "strokeWidth": 1.5},
+          "encoding": {
+            "longitude": {"field": "label_lon", "type": "quantitative"},
+            "latitude": {"field": "label_lat", "type": "quantitative"},
+            "size": {
+              "field": "any_barrier",
+              "type": "quantitative",
+              "scale": {"domain": [0, 50], "range": [0, 3600], "zero": true},
+              "legend": {
+                "title": "% held back by anything",
+                "values": [25, 35, 45],
+                "symbolFillColor": "#c9c3d6",
+                "symbolStrokeColor": "#ffffff",
+                "orient": "right"
+              }
+            },
+            "color": {
+              "field": "top_barrier",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Not enough staff skills",
+                  "Unsure it is worth the cost",
+                  "Not enough funds",
+                  "Unsure what technology they need"
+                ],
+                "range": ["#d9822b", "#2a8c8c", "#c2456b", "#4f6bd9"]
+              },
+              "legend": {"title": "Biggest single barrier", "orient": "right"}
+            },
+            "tooltip": [
+              {"field": "state", "title": "State / territory"},
+              {"field": "any_barrier", "title": "% held back by any barrier", "format": ".1f"},
+              {"field": "top_barrier", "title": "Biggest barrier"},
+              {"field": "top_pct", "title": "% citing biggest barrier", "format": ".1f"},
+              {"field": "barrier_skills", "title": "Staff skills (%)"},
+              {"field": "barrier_cost_benefit", "title": "Unsure of cost/benefit (%)"},
+              {"field": "barrier_funds", "title": "Lack of funds (%)"},
+              {"field": "barrier_understanding", "title": "Unsure what they need (%)"}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "fontSize": 11, "fontWeight": 700, "color": "#ffffff", "lineHeight": 13},
+          "encoding": {
+            "longitude": {"field": "label_lon", "type": "quantitative"},
+            "latitude": {"field": "label_lat", "type": "quantitative"},
+            "text": {"field": "label_text"}
+          },
+          "transform": [
+            {"calculate": "[datum.abbr, format(datum.any_barrier, '.0f') + '%']", "as": "label_text"}
+          ]
+        }
+      ]
+    }
+  ]
+}

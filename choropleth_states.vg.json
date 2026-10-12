@@ -1,0 +1,227 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Choropleth map: % of businesses in each state/territory using a chosen digital technology, 2024-25 (ABS). A dropdown switches technology.",
+  "width": "container",
+  "height": 420,
+  "params": [
+    {
+      "name": "tech",
+      "value": "ai",
+      "bind": {
+        "input": "select",
+        "name": "Show businesses using: ",
+        "options": [
+          "ai",
+          "cloud",
+          "digital_platforms",
+          "crm",
+          "iot",
+          "data_analytics"
+        ],
+        "labels": [
+          "Artificial intelligence",
+          "Cloud technology",
+          "Digital platforms",
+          "CRM software",
+          "Internet of Things",
+          "Data analytics"
+        ]
+      }
+    }
+  ],
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -132,
+      0
+    ]
+  },
+  "data": {
+    "url": "data/ict_by_state.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "ai": "number",
+        "cloud": "number",
+        "digital_platforms": "number",
+        "crm": "number",
+        "iot": "number",
+        "data_analytics": "number",
+        "label_lon": "number",
+        "label_lat": "number",
+        "lon": "number",
+        "lat": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum[tech]",
+      "as": "pct"
+    },
+    {
+      "calculate": "{'ai': 'Artificial intelligence', 'cloud': 'Cloud technology', 'digital_platforms': 'Digital platforms', 'crm': 'CRM software', 'iot': 'Internet of Things', 'data_analytics': 'Data analytics'}[tech]",
+      "as": "tech_label"
+    },
+    {
+      "lookup": "state",
+      "from": {
+        "data": {
+          "url": "js/australia_states.topojson",
+          "format": {
+            "type": "topojson",
+            "feature": "states"
+          }
+        },
+        "key": "properties.name"
+      },
+      "as": "geo"
+    }
+  ],
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "pct",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "purples",
+            "zero": false
+          },
+          "legend": {
+            "title": "% of businesses",
+            "orient": "bottom-left",
+            "direction": "horizontal",
+            "gradientLength": 160
+          }
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 3
+          },
+          "value": 1.2
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State / territory"
+          },
+          {
+            "field": "tech_label",
+            "title": "Technology"
+          },
+          {
+            "field": "pct",
+            "title": "% of businesses using it",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.abbr == 'ACT'"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#6b6578",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "label_lon"
+        },
+        "latitude2": {
+          "field": "label_lat"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "lineHeight": 15
+      },
+      "encoding": {
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label_text"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.shade > 0.6 && datum.abbr != 'ACT'",
+            "value": "#ffffff"
+          },
+          "value": "#1e1b2e"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "[datum.abbr, format(datum.pct, '.0f') + '%']",
+          "as": "label_text"
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "min",
+              "field": "pct",
+              "as": "pct_min"
+            },
+            {
+              "op": "max",
+              "field": "pct",
+              "as": "pct_max"
+            }
+          ]
+        },
+        {
+          "calculate": "(datum.pct - datum.pct_min) / (datum.pct_max - datum.pct_min)",
+          "as": "shade"
+        }
+      ]
+    }
+  ]
+}

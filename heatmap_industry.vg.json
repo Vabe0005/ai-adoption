@@ -1,0 +1,190 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap: % of businesses in each industry using six digital technologies, 2024-25 (ABS). Rows are sorted by AI use. Click a row to highlight it.",
+  "width": "container",
+  "height": {
+    "step": 26
+  },
+  "data": {
+    "url": "data/ict_by_industry.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "ai": "number",
+        "cloud": "number",
+        "digital_platforms": "number",
+        "crm": "number",
+        "iot": "number",
+        "data_analytics": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "ai",
+        "cloud",
+        "digital_platforms",
+        "crm",
+        "iot",
+        "data_analytics"
+      ],
+      "as": [
+        "tech",
+        "pct"
+      ]
+    },
+    {
+      "calculate": "{'ai': 'AI', 'cloud': 'Cloud', 'digital_platforms': 'Platforms', 'crm': 'CRM', 'iot': 'IoT', 'data_analytics': 'Analytics'}[datum.tech]",
+      "as": "tech_label"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "tech_label",
+      "type": "nominal",
+      "sort": [
+        "AI",
+        "Cloud",
+        "Platforms",
+        "CRM",
+        "IoT",
+        "Analytics"
+      ],
+      "title": null,
+      "axis": {
+        "orient": "top",
+        "labelAngle": 0,
+        "labelFontSize": 12,
+        "domain": false,
+        "ticks": false,
+        "labelFontWeight": {
+          "condition": {
+            "test": "datum.value == 'AI'",
+            "value": 800
+          },
+          "value": 400
+        },
+        "labelColor": {
+          "condition": {
+            "test": "datum.value == 'AI'",
+            "value": "#4b2aa0"
+          },
+          "value": "#4a4458"
+        },
+        "labelPadding": 6
+      }
+    },
+    "y": {
+      "field": "industry",
+      "type": "nominal",
+      "sort": {
+        "field": "ai",
+        "op": "max",
+        "order": "descending"
+      },
+      "title": null,
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 12,
+        "labelPadding": 8
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#ffffff",
+        "strokeWidth": 2,
+        "cornerRadius": 3
+      },
+      "encoding": {
+        "color": {
+          "field": "pct",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "purples",
+            "type": "sqrt",
+            "domain": [
+              0,
+              90
+            ]
+          },
+          "legend": {
+            "title": "% of businesses",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 200
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "industry_full",
+            "title": "Industry"
+          },
+          {
+            "field": "tech_label",
+            "title": "Technology"
+          },
+          {
+            "field": "pct",
+            "title": "% of businesses using it",
+            "format": ".1f"
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "industry"
+            ],
+            "on": "click",
+            "clear": "dblclick"
+          }
+        }
+      ]
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11
+      },
+      "encoding": {
+        "text": {
+          "condition": {
+            "test": "isValid(datum.pct)",
+            "field": "pct",
+            "format": ".0f"
+          },
+          "value": "n/a"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.pct > 40",
+            "value": "#ffffff"
+          },
+          "value": "#1e1b2e"
+        },
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1
+          },
+          "value": 0.3
+        }
+      }
+    }
+  ]
+}
