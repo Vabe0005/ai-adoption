@@ -70,10 +70,10 @@
                 "domain": [
                   "Not enough staff skills",
                   "Unsure it is worth the cost",
-                  "Not enough funds",
-                  "Unsure what technology they need"
+                  "Not enough funds"
+        
                 ],
-                "range": ["#d9822b", "#2a8c8c", "#c2456b", "#4f6bd9"]
+                "range": ["#d9822b", "#2a8c8c", "#c2456b"]
               },
               "legend": {"title": "Biggest single barrier", "orient": "right"}
             },
