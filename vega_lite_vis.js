@@ -28,7 +28,8 @@ var charts = [
   ["#tilemap_toolkit", "tilemap_toolkit.vg.json"],
   ["#diverging_industry", "diverging_industry.vg.json"],
   ["#heatmap_industry", "heatmap_industry.vg.json"],
-  ["#symbol_barriers", "symbol_barriers.vg.json"]
+  ["#symbol_barriers", "symbol_barriers.vg.json"],
+  ["#choropleth_europe", "choropleth_europe.vg.json"]
 ];
 
 charts.forEach(function (chart) {
