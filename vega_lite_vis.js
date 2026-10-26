@@ -29,7 +29,8 @@ var charts = [
   ["#diverging_industry", "diverging_industry.vg.json"],
   ["#heatmap_industry", "heatmap_industry.vg.json"],
   ["#symbol_barriers", "symbol_barriers.vg.json"],
-  ["#choropleth_europe", "choropleth_europe.vg.json"]
+  ["#choropleth_europe", "choropleth_europe.vg.json"],
+  ["#dotplot_countries", "dotplot_countries.vg.json"]
 ];
 
 charts.forEach(function (chart) {
