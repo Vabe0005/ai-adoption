@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Marimekko chart: each column is an industry, its width is the number of businesses and the purple part is the % using AI, so purple area = number of businesses using AI, 2024-25 (ABS).",
+  "width": "container",
+  "height": 380,
+  "data": {
+    "url": "ict_by_industry.csv",
+    "format": {"type": "csv", "parse": {"ai": "number", "businesses": "number"}}
+  },
+  "transform": [
+    {
+      "window": [{"op": "sum", "field": "businesses", "as": "x_end"}],
+      "sort": [{"field": "ai", "order": "descending"}, {"field": "industry", "order": "ascending"}],
+      "frame": [null, 0]
+    },
+    {"calculate": "datum.x_end - datum.businesses", "as": "x_start"},
+    {"calculate": "(datum.x_start + datum.x_end) / 2", "as": "x_mid"},
+    {"calculate": "datum.businesses * datum.ai / 100", "as": "users"},
+    {"calculate": "format(datum.users, '.0f') + 'k'", "as": "users_label"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "x_start",
+      "type": "quantitative",
+      "scale": {"domain": [0, 996], "nice": false},
+      "title": "Number of businesses (thousands) — the wider the column, the more businesses in that industry",
+      "axis": {"grid": false, "values": [0, 200, 400, 600, 800, 996]}
+    },
+    "x2": {"field": "x_end"},
+    "tooltip": [
+      {"field": "industry_full", "title": "Industry"},
+      {"field": "businesses", "title": "Businesses ('000)"},
+      {"field": "ai", "title": "% using AI", "format": ".1f"},
+      {"field": "users", "title": "Businesses using AI ('000)", "format": ".1f"}
+    ]
+  },
+  "layer": [
+    {
+      "mark": {"type": "rect", "color": "#ece9f1", "stroke": "#ffffff", "strokeWidth": 1.5},
+      "encoding": {
+        "y": {"datum": 100, "type": "quantitative", "scale": {"domain": [0, 100]}, "title": "% of businesses using AI", "axis": {"values": [0, 25, 50, 75, 100], "grid": false}},
+        "y2": {"datum": 0}
+      }
+    },
+    {
+      "mark": {"type": "rect", "color": "#6a3fd6", "stroke": "#ffffff", "strokeWidth": 1.5},
+      "encoding": {
+        "y": {"field": "ai", "type": "quantitative", "title": "% of businesses using AI"},
+        "y2": {"datum": 0}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.businesses >= 10"}],
+      "mark": {"type": "text", "angle": 270, "align": "right", "baseline": "middle", "dx": -6, "fontSize": 11, "color": "#4a4458"},
+      "encoding": {
+        "x": {"field": "x_mid", "type": "quantitative"},
+        "x2": null,
+        "y": {"datum": 100, "type": "quantitative"},
+        "text": {"field": "industry"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.businesses >= 40"}],
+      "mark": {"type": "text", "baseline": "bottom", "dy": -4, "fontSize": 11, "fontWeight": 700, "color": "#4b2aa0"},
+      "encoding": {
+        "x": {"field": "x_mid", "type": "quantitative"},
+        "x2": null,
+        "y": {"field": "ai", "type": "quantitative"},
+        "text": {"field": "users_label"}
+      }
+    }
+  ]
+}

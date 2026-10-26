@@ -32,7 +32,8 @@ var charts = [
   ["#choropleth_europe", "choropleth_europe.vg.json"],
   ["#dotplot_countries", "dotplot_countries.vg.json"],
   ["#butterfly_size", "butterfly_size.vg.json"],
-  ["#bump_tech_size", "bump_tech_size.vg.json"]
+  ["#bump_tech_size", "bump_tech_size.vg.json"],
+  ["#marimekko_industry", "marimekko_industry.vg.json"]
 ];
 
 charts.forEach(function (chart) {
