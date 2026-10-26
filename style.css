@@ -249,3 +249,4 @@ strong.ai { color: var(--ai-dark); }
   .pure-u-md-1-2 + .pure-u-md-1-2 > .chart-card { margin-left: 0; margin-right: 0; }
   .chart-card { padding: 14px 12px 10px; overflow-x: auto; }
 }
+   .chapter .pure-g { align-items: center; }

@@ -81,8 +81,6 @@
       "transform": [
         {
           "fold": [
-            "cloud",
-            "digital_platforms",
             "crm",
             "ai",
             "iot",
@@ -94,19 +92,19 @@
           ]
         },
         {
-          "calculate": "indexof(['cloud', 'digital_platforms', 'crm', 'ai', 'iot', 'data_analytics'], datum.tech)",
+          "calculate": "indexof(['crm', 'ai', 'iot', 'data_analytics'], datum.tech)",
           "as": "i"
         },
         {
-          "calculate": "['Cloud technology', 'Digital platforms', 'CRM software', 'Artificial intelligence', 'Internet of Things', 'Data analytics'][datum.i]",
+          "calculate": "['CRM software', 'Artificial intelligence', 'Internet of Things', 'Data analytics'][datum.i]",
           "as": "tech_label"
         },
         {
-          "calculate": "datum.tx0 + 0.09 + datum.i * 0.14",
+          "calculate": "datum.tx0 + 0.12 + datum.i * 0.2",
           "as": "bx0"
         },
         {
-          "calculate": "datum.bx0 + 0.11",
+          "calculate": "datum.bx0 + 0.15",
           "as": "bx1"
         },
         {
@@ -114,7 +112,7 @@
           "as": "by0"
         },
         {
-          "calculate": "datum.by0 - datum.pct / 100 * 0.6",
+          "calculate": "datum.by0 - datum.pct / 25 * 0.6",
           "as": "by1"
         },
         {
