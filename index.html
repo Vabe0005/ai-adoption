@@ -35,27 +35,7 @@
 
   <main class="wrap">
 
-    <!-- ===================== KEY NUMBERS ===================== -->
-    <section class="pure-g stats">
-      <div class="pure-u-1 pure-u-md-1-3">
-        <div class="stat">
-          <span class="stat-num">12%</span>
-          <span class="stat-label">of Australian businesses used AI in 2024–25</span>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-3">
-        <div class="stat">
-          <span class="stat-num">1%</span>
-          <span class="stat-label">used AI in 2021–22, before ChatGPT launched</span>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-3">
-        <div class="stat">
-          <span class="stat-num">38%</span>
-          <span class="stat-label">of media &amp; telecoms businesses use AI, the most of any industry</span>
-        </div>
-      </div>
-    </section>
+    <p class="lead lead-first">In 2024–25, <strong class="ai">12%</strong> of Australian businesses used artificial intelligence (AI). Three years earlier, before ChatGPT launched, it was just <strong class="ai">1%</strong>. Some industries have moved much faster than others: in media and telecommunications, <strong class="ai">38%</strong> of businesses now use AI, the most of any industry.</p>
 
     <p class="lead">Every two years, the Australian Bureau of Statistics (ABS) asks almost 7,000 businesses which technologies they use. In the latest survey, covering July 2024 to June 2025, artificial intelligence (AI) appeared on the list far more often than ever before. Here, “AI” means any use of AI tools in the business, from chatbots that draft emails to software that predicts sales.</p>
 
@@ -138,6 +118,23 @@
             <p>Switch the map to <em>Cloud technology</em> and the picture changes: cloud is used by roughly three in four businesses everywhere. AI is still at an early, uneven stage.</p>
             <p class="caveat">Smaller states and territories have fewer businesses in the survey, so their figures are less precise.</p>
           </div>
+        </div>
+      </div>
+
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-2-5">
+          <div class="side-text">
+            <h3>High rates, but few users</h3>
+            <p>A percentage only tells half the story. The Northern Territory has the highest AI rate in the country, but it has so few businesses that it accounts for just 1% of all the businesses using AI.</p>
+            <p>The dot map counts businesses instead. Almost two in three AI users are in New South Wales and Victoria. Their AI rates are only around average, but most of Australia’s businesses are there.</p>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-3-5">
+          <figure class="chart-card">
+            <figcaption class="chart-title">Two in three businesses using AI are in NSW or Victoria<span class="chart-sub">Each dot is 250 businesses using AI</span></figcaption>
+            <div id="dotmap_ai_users" class="vis vis-map"></div>
+            <p class="chart-note">Number of dots = businesses in each state × % using AI, divided by 250. Dots are placed at random inside their state or territory, so they show how many businesses use AI, not exactly where they are. Source: ABS, Characteristics of Australian Business 2024–25, data cube 1 table 1 and data cube 6 table 2.</p>
+          </figure>
         </div>
       </div>
 
@@ -241,7 +238,45 @@
     <!-- ===================== CONCLUSION ===================== -->
     <section class="chapter conclusion">
       <h2>The switch is on, but the room isn’t lit yet</h2>
-      <p class="body-text">In three years, AI went from 1% of Australian businesses to 12%. But nearly 9 in 10 businesses, mostly small ones and those in hands-on industries, are not using it yet. Australia’s big businesses also trail most of Europe. Building skills and showing clearly what AI is worth would help the rest catch up.</p>
+      <p class="body-text">In three years, AI went from 1% of Australian businesses to 12%. But nearly 9 in 10 businesses are not using it yet, and the ones that are left behind have a lot in common.</p>
+      <p class="body-text"><strong>Size.</strong> Large businesses are three times as likely to use AI as micro businesses (35% vs 11%), yet micro businesses make up 56% of all AI users, simply because there are so many of them.</p>
+      <p class="body-text"><strong>Attitude.</strong> Businesses that innovate are far more likely to use AI at every size. A small business that innovates is almost five times as likely to use it.</p>
+      <p class="body-text"><strong>Place.</strong> The Northern Territory and Tasmania have the highest rates, but two in three AI users are in NSW and Victoria, where most businesses are.</p>
+      <p class="body-text"><strong>Industry.</strong> Screen-based industries lead: 38% of media and telecoms businesses use AI, but only 1% in transport and logistics. Professional services has almost a third of all AI users.</p>
+      <p class="body-text"><strong>The world.</strong> Australia’s large businesses (35%) trail Europe’s (55%), ranking 27th of 33 countries. The gap is much smaller for small businesses.</p>
+      <p class="body-text"><strong>Barriers.</strong> More than a third of businesses are held back from using digital technology, most often by a lack of staff skills or doubts that it is worth the cost.</p>
+      <p class="body-text">Building skills, and showing small businesses in hands-on industries clearly what AI is worth, would do the most to help the rest catch up.</p>
+    </section>
+
+    <!-- ===================== ABOUT THE DATA ===================== -->
+    <section class="chapter about">
+      <h2>About the data</h2>
+      <div class="pure-g top-align">
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="side-text">
+            <h3>How the data was prepared</h3>
+            <ol>
+              <li><strong>ABS survey.</strong> Figures come from the ABS <em>Characteristics of Australian Business 2024–25</em>, which surveys about 7,000 businesses. Values were copied from data cube 6 (tables 2 and 4: technologies used and factors limiting their use) and data cube 1 (table 1: number of businesses) into small CSV files by business size, industry and state. Short industry names were added; no values were changed.</li>
+              <li><strong>Worked-out numbers.</strong> The number of businesses using AI is the number of businesses multiplied by the % using AI. This feeds the butterfly chart, the Marimekko chart and the dot map. Gaps from the 12.1% average and technology ranks are calculated inside Vega-Lite.</li>
+              <li><strong>Europe.</strong> Country figures by business size come from table 1 of Eurostat’s 2026 report on AI use in EU enterprises (2025 data). Australia’s ABS figures for the closest size groups were added to the same file so the two sources can be compared directly.</li>
+              <li><strong>Maps.</strong> State and country outlines are from Natural Earth (1:50m). They were filtered to Australia and Europe, simplified and converted to TopoJSON. Jervis Bay Territory was removed because the ABS has no separate figures for it.</li>
+              <li><strong>Dot map.</strong> Each state’s number of AI users was divided by 250 to get its number of dots. A script then placed the dots at random points inside the state’s outline, using a fixed random seed so the map is the same every time.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+          <div class="side-text">
+            <h3>Things to keep in mind</h3>
+            <ul>
+              <li>The ABS figures are survey estimates. Smaller states and territories have fewer businesses in the sample, so their figures are less precise.</li>
+              <li>Eurostat only counts businesses with 10 or more staff, and its size groups (10–49, 50–249, 250+) differ from the ABS groups (5–19, 20–199, 200+). Europe’s figures are for 2025; Australia’s are for the 2024–25 financial year.</li>
+              <li>The barriers question asks about digital technology in general, not only AI.</li>
+              <li>Dots on the dot map are placed at random inside each state, so they show how many businesses use AI, not exactly where they are.</li>
+              <li>“Using AI” covers any use, from a chatbot that drafts emails to software built into business systems. It says nothing about how much a business relies on it.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 

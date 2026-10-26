@@ -264,3 +264,9 @@ strong.ai { color: var(--ai-dark); }
 .chapter .pure-g { align-items: center; }
 /* ...except where two charts sit side by side: line their tops up */
 .chapter .pure-g.top-align { align-items: flex-start; }
+
+/* ============ About the data ============ */
+.about { padding-bottom: 40px; }
+.about ol, .about ul { padding-left: 20px; margin: 0; }
+.about li { font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
+.lead-first { margin-top: 40px; }
