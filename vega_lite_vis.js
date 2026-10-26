@@ -25,6 +25,7 @@ var charts = [
   ["#waffle_size", "waffle_size.vg.json"],
   ["#dumbbell_innovation", "dumbbell_innovation.vg.json"],
   ["#choropleth_states", "choropleth_states.vg.json"],
+  ["#dotmap_ai_users", "dotmap_ai_users.vg.json"],
   ["#tilemap_toolkit", "tilemap_toolkit.vg.json"],
   ["#diverging_industry", "diverging_industry.vg.json"],
   ["#heatmap_industry", "heatmap_industry.vg.json"],
