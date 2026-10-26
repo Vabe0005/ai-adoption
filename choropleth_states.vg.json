@@ -180,7 +180,7 @@
       },
       "encoding": {
         "longitude": {
-          "field": "label_lon",
+          "field": "text_lon",
           "type": "quantitative"
         },
         "latitude": {
@@ -192,13 +192,17 @@
         },
         "color": {
           "condition": {
-            "test": "datum.shade > 0.6 && datum.abbr != 'ACT'",
+            "test": "datum.shade > 0.6 && datum.abbr != 'ACT' && datum.abbr != 'TAS'",
             "value": "#ffffff"
           },
           "value": "#1e1b2e"
         }
       },
       "transform": [
+        {
+          "calculate": "datum.abbr == 'TAS' ? 150.4 : datum.label_lon",
+          "as": "text_lon"
+        },
         {
           "calculate": "[datum.abbr, format(datum.pct, '.0f') + '%']",
           "as": "label_text"

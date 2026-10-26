@@ -7,33 +7,86 @@
     "url": "ict_by_size.csv",
     "format": {
       "type": "csv",
-      "parse": {"order": "number", "cloud": "number", "digital_platforms": "number", "crm": "number", "edi": "number", "iot": "number", "data_analytics": "number", "erp": "number", "printing_3d": "number", "ai": "number", "xr": "number"}
+      "parse": {
+        "order": "number",
+        "cloud": "number",
+        "digital_platforms": "number",
+        "crm": "number",
+        "edi": "number",
+        "iot": "number",
+        "data_analytics": "number",
+        "erp": "number",
+        "printing_3d": "number",
+        "ai": "number",
+        "xr": "number"
+      }
     }
   },
   "transform": [
     {
-      "fold": ["cloud", "digital_platforms", "crm", "edi", "iot", "data_analytics", "erp", "printing_3d", "ai", "xr"],
-      "as": ["tech", "pct"]
+      "fold": [
+        "cloud",
+        "digital_platforms",
+        "crm",
+        "edi",
+        "iot",
+        "data_analytics",
+        "erp",
+        "printing_3d",
+        "ai",
+        "xr"
+      ],
+      "as": [
+        "tech",
+        "pct"
+      ]
     },
     {
       "calculate": "{'cloud': 'Cloud', 'digital_platforms': 'Digital platforms', 'crm': 'CRM software', 'edi': 'EDI ordering', 'iot': 'Internet of Things', 'data_analytics': 'Data analytics', 'erp': 'ERP software', 'printing_3d': '3D printing', 'ai': 'Artificial intelligence', 'xr': 'VR / AR'}[datum.tech]",
       "as": "tech_label"
     },
     {
-      "window": [{"op": "rank", "as": "rank"}],
-      "sort": [{"field": "pct", "order": "descending"}],
-      "groupby": ["size"]
+      "window": [
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "pct",
+          "order": "descending"
+        }
+      ],
+      "groupby": [
+        "size"
+      ]
     },
-    {"calculate": "datum.size + '|' + datum.staff", "as": "size_label"}
+    {
+      "calculate": "datum.size + '|' + datum.staff",
+      "as": "size_label"
+    }
   ],
   "encoding": {
     "x": {
       "field": "size_label",
       "type": "ordinal",
-      "sort": {"field": "order"},
+      "sort": {
+        "field": "order"
+      },
       "title": null,
-      "scale": {"padding": 1.6},
-      "axis": {"orient": "top", "labelAngle": 0, "labelFontSize": 12, "labelExpr": "split(datum.value, '|')", "domain": false, "ticks": false, "labelPadding": 8}
+      "scale": {
+        "padding": 1.6
+      },
+      "axis": {
+        "orient": "top",
+        "labelAngle": 0,
+        "labelFontSize": 12,
+        "labelExpr": "split(datum.value, '|')",
+        "domain": false,
+        "ticks": false,
+        "labelPadding": 8
+      }
     },
     "y": {
       "field": "rank",
@@ -41,45 +94,131 @@
       "axis": null
     },
     "color": {
-      "condition": {"test": "datum.tech == 'ai'", "value": "#6a3fd6"},
+      "condition": {
+        "test": "datum.tech == 'ai'",
+        "value": "#6a3fd6"
+      },
       "value": "#c9c3d6"
     }
   },
   "layer": [
     {
-      "mark": {"type": "line", "interpolate": "monotone"},
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone"
+      },
       "encoding": {
-        "detail": {"field": "tech"},
-        "strokeWidth": {"condition": {"test": "datum.tech == 'ai'", "value": 4}, "value": 2}
+        "detail": {
+          "field": "tech"
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.tech == 'ai'",
+            "value": 4
+          },
+          "value": 2
+        }
       }
     },
     {
-      "mark": {"type": "circle", "size": 120, "opacity": 1, "stroke": "#ffffff", "strokeWidth": 1.5},
+      "mark": {
+        "type": "circle",
+        "size": 120,
+        "opacity": 1,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      },
       "encoding": {
         "tooltip": [
-          {"field": "tech_label", "title": "Technology"},
-          {"field": "size", "title": "Business size"},
-          {"field": "rank", "title": "Rank"},
-          {"field": "pct", "title": "% of businesses using it", "format": ".1f"}
+          {
+            "field": "tech_label",
+            "title": "Technology"
+          },
+          {
+            "field": "size",
+            "title": "Business size"
+          },
+          {
+            "field": "rank",
+            "title": "Rank"
+          },
+          {
+            "field": "pct",
+            "title": "% of businesses using it",
+            "format": ".1f"
+          }
         ]
       }
     },
     {
-      "transform": [{"filter": "datum.order == 1"}],
-      "mark": {"type": "text", "align": "right", "dx": -12, "fontSize": 11},
+      "transform": [
+        {
+          "filter": "datum.order == 1"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -12,
+        "fontSize": 11
+      },
       "encoding": {
-        "text": {"field": "tech_label"},
-        "fontWeight": {"condition": {"test": "datum.tech == 'ai'", "value": 700}, "value": 400},
-        "color": {"condition": {"test": "datum.tech == 'ai'", "value": "#4b2aa0"}, "value": "#6b6578"}
+        "text": {
+          "field": "tech_label"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.tech == 'ai'",
+            "value": "#4b2aa0"
+          },
+          "value": "#6b6578"
+        }
       }
     },
     {
-      "transform": [{"filter": "datum.order == 4"}],
-      "mark": {"type": "text", "align": "left", "dx": 12, "fontSize": 11},
+      "transform": [
+        {
+          "filter": "datum.order == 4"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "fontSize": 11
+      },
       "encoding": {
-        "text": {"field": "tech_label"},
-        "fontWeight": {"condition": {"test": "datum.tech == 'ai'", "value": 700}, "value": 400},
-        "color": {"condition": {"test": "datum.tech == 'ai'", "value": "#4b2aa0"}, "value": "#6b6578"}
+        "text": {
+          "field": "tech_label"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.tech == 'ai'",
+            "value": "#4b2aa0"
+          },
+          "value": "#6b6578"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.order == 4 && datum.tech == 'ai'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "dy": 14,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#4b2aa0"
+      },
+      "encoding": {
+        "text": {
+          "value": "down from 4th to 7th"
+        }
       }
     }
   ]

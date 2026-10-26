@@ -206,14 +206,16 @@
       },
       "mark": {
         "type": "text",
-        "align": "right",
-        "baseline": "top",
-        "dx": -6,
-        "dy": 4,
+        "align": "left",
+        "baseline": "bottom",
+        "dx": 6,
+        "dy": -4,
         "fontStyle": "italic",
         "fontSize": 11,
         "color": "#1e1b2e",
-        "y": 0
+        "y": {
+          "expr": "height"
+        }
       },
       "encoding": {
         "x": {

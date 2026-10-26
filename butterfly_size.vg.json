@@ -5,83 +5,232 @@
     "url": "ai_by_size.csv",
     "format": {
       "type": "csv",
-      "parse": {"order": "number", "ai": "number", "businesses": "number"}
+      "parse": {
+        "order": "number",
+        "ai": "number",
+        "businesses": "number"
+      }
     }
   },
   "transform": [
-    {"calculate": "datum.businesses * datum.ai / 100", "as": "users"},
-    {"calculate": "datum.size + ' (' + datum.staff + ')'", "as": "label"}
+    {
+      "calculate": "datum.businesses * datum.ai / 100",
+      "as": "users"
+    },
+    {
+      "calculate": "datum.size + ' (' + datum.staff + ')'",
+      "as": "label"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "users",
+          "as": "total_users"
+        }
+      ]
+    },
+    {
+      "calculate": "format(datum.users, '.0f') + '  (' + format(datum.users / datum.total_users, '.0%') + ' of all AI users)'",
+      "as": "users_label"
+    }
   ],
   "spacing": 0,
   "hconcat": [
     {
       "width": 260,
-      "height": {"step": 44},
-      "title": {"text": "Chance of using AI", "subtitle": "% of businesses of that size", "anchor": "end", "fontSize": 13, "subtitleFontSize": 11},
+      "height": {
+        "step": 44
+      },
+      "title": {
+        "text": "Chance of using AI",
+        "subtitle": "% of businesses of that size",
+        "anchor": "end",
+        "fontSize": 13,
+        "subtitleFontSize": 11
+      },
       "encoding": {
-        "y": {"field": "label", "type": "nominal", "sort": {"field": "order"}, "axis": null},
+        "y": {
+          "field": "label",
+          "type": "nominal",
+          "sort": {
+            "field": "order"
+          },
+          "axis": null
+        },
         "x": {
           "field": "ai",
           "type": "quantitative",
-          "scale": {"domain": [0, 40], "reverse": true},
+          "scale": {
+            "domain": [
+              0,
+              40
+            ],
+            "reverse": true
+          },
           "title": null,
-          "axis": {"grid": false, "labels": false, "ticks": false, "domain": false}
+          "axis": {
+            "grid": false,
+            "labels": false,
+            "ticks": false,
+            "domain": false
+          }
         }
       },
       "layer": [
         {
-          "mark": {"type": "bar", "color": "#b9a3ee", "cornerRadiusTopLeft": 3, "cornerRadiusBottomLeft": 3, "height": {"band": 0.65}},
+          "mark": {
+            "type": "bar",
+            "color": "#b9a3ee",
+            "cornerRadiusTopLeft": 3,
+            "cornerRadiusBottomLeft": 3,
+            "height": {
+              "band": 0.65
+            }
+          },
           "encoding": {
             "tooltip": [
-              {"field": "label", "title": "Business size"},
-              {"field": "ai", "title": "% using AI", "format": ".1f"}
+              {
+                "field": "label",
+                "title": "Business size"
+              },
+              {
+                "field": "ai",
+                "title": "% using AI",
+                "format": ".1f"
+              }
             ]
           }
         },
         {
-          "mark": {"type": "text", "align": "right", "dx": -6, "fontSize": 12, "fontWeight": 600, "color": "#4a4458"},
-          "encoding": {"text": {"field": "ai", "type": "quantitative", "format": ".0f"}}
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -6,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#4a4458"
+          },
+          "encoding": {
+            "text": {
+              "field": "ai",
+              "type": "quantitative",
+              "format": ".0f"
+            }
+          }
         }
       ]
     },
     {
       "width": 140,
-      "height": {"step": 44},
-      "view": {"stroke": null},
-      "mark": {"type": "text", "fontSize": 12, "fontWeight": 600, "color": "#1e1b2e"},
+      "height": {
+        "step": 44
+      },
+      "view": {
+        "stroke": null
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#1e1b2e"
+      },
       "encoding": {
-        "y": {"field": "label", "type": "nominal", "sort": {"field": "order"}, "axis": null},
-        "text": {"field": "label"}
+        "y": {
+          "field": "label",
+          "type": "nominal",
+          "sort": {
+            "field": "order"
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label"
+        }
       }
     },
     {
-      "width": 260,
-      "height": {"step": 44},
-      "title": {"text": "Number using AI", "subtitle": "thousands of businesses", "anchor": "start", "fontSize": 13, "subtitleFontSize": 11},
+      "width": 300,
+      "height": {
+        "step": 44
+      },
+      "title": {
+        "text": "Number using AI",
+        "subtitle": "thousands of businesses (share of all businesses using AI)",
+        "anchor": "start",
+        "fontSize": 13,
+        "subtitleFontSize": 11
+      },
       "encoding": {
-        "y": {"field": "label", "type": "nominal", "sort": {"field": "order"}, "axis": null},
+        "y": {
+          "field": "label",
+          "type": "nominal",
+          "sort": {
+            "field": "order"
+          },
+          "axis": null
+        },
         "x": {
           "field": "users",
           "type": "quantitative",
-          "scale": {"domain": [0, 80]},
+          "scale": {
+            "domain": [
+              0,
+              150
+            ]
+          },
           "title": null,
-          "axis": {"grid": false, "labels": false, "ticks": false, "domain": false}
+          "axis": {
+            "grid": false,
+            "labels": false,
+            "ticks": false,
+            "domain": false
+          }
         }
       },
       "layer": [
         {
-          "mark": {"type": "bar", "color": "#6a3fd6", "cornerRadiusTopRight": 3, "cornerRadiusBottomRight": 3, "height": {"band": 0.65}},
+          "mark": {
+            "type": "bar",
+            "color": "#6a3fd6",
+            "cornerRadiusTopRight": 3,
+            "cornerRadiusBottomRight": 3,
+            "height": {
+              "band": 0.65
+            }
+          },
           "encoding": {
             "tooltip": [
-              {"field": "label", "title": "Business size"},
-              {"field": "businesses", "title": "Businesses of this size ('000)"},
-              {"field": "users", "title": "Businesses using AI ('000)", "format": ".1f"}
+              {
+                "field": "label",
+                "title": "Business size"
+              },
+              {
+                "field": "businesses",
+                "title": "Businesses of this size ('000)"
+              },
+              {
+                "field": "users",
+                "title": "Businesses using AI ('000)",
+                "format": ".1f"
+              }
             ]
           }
         },
         {
-          "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 12, "fontWeight": 600, "color": "#4a4458"},
-          "encoding": {"text": {"field": "users", "type": "quantitative", "format": ".0f"}}
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 6,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#4a4458"
+          },
+          "encoding": {
+            "text": {
+              "field": "users_label"
+            }
+          }
         }
       ]
     }
