@@ -280,3 +280,11 @@ strong.ai { color: var(--ai-dark); }
   .intro .lead { padding-right: 0; }
   .intro-img { max-width: 300px; margin-top: 8px; }
 }
+
+/* "How to read it" lines beside charts */
+.side-text p.how {
+  font-size: 15px;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--ai);
+  padding-left: 12px;
+}
