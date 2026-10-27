@@ -3,13 +3,32 @@
   "description": "Waffle charts: out of every 100 businesses of each size, how many used AI in 2024-25 (ABS).",
   "data": {
     "url": "ai_by_size.csv",
-    "format": {"type": "csv", "parse": {"order": "number", "ai": "number"}}
+    "format": {
+      "type": "csv",
+      "parse": {
+        "order": "number",
+        "ai": "number"
+      }
+    }
   },
   "transform": [
-    {"calculate": "sequence(0, 100)", "as": "cell"},
-    {"flatten": ["cell"]},
-    {"calculate": "datum.cell % 10", "as": "col"},
-    {"calculate": "floor(datum.cell / 10)", "as": "row"},
+    {
+      "calculate": "sequence(0, 100)",
+      "as": "cell"
+    },
+    {
+      "flatten": [
+        "cell"
+      ]
+    },
+    {
+      "calculate": "datum.cell % 10",
+      "as": "col"
+    },
+    {
+      "calculate": "floor(datum.cell / 10)",
+      "as": "row"
+    },
     {
       "calculate": "datum.cell < round(datum.ai) ? 'Uses AI' : 'Does not use AI'",
       "as": "status"
@@ -23,7 +42,10 @@
     "column": {
       "field": "header",
       "type": "nominal",
-      "sort": {"field": "order", "op": "min"},
+      "sort": {
+        "field": "order",
+        "op": "min"
+      },
       "title": null,
       "header": {
         "labelExpr": "split(datum.value, '|')",
@@ -38,24 +60,122 @@
   "spec": {
     "width": 150,
     "height": 150,
-    "mark": {"type": "square", "size": 130},
-    "encoding": {
-      "x": {"field": "col", "type": "ordinal", "axis": null},
-      "y": {"field": "row", "type": "ordinal", "axis": null, "sort": "descending"},
-      "color": {
-        "field": "status",
-        "type": "nominal",
-        "scale": {
-          "domain": ["Uses AI", "Does not use AI"],
-          "range": ["#6a3fd6", "#dcd8e6"]
+    "layer": [
+      {
+        "mark": {
+          "type": "square",
+          "size": 130
         },
-        "legend": {"title": null, "orient": "top", "direction": "horizontal"}
+        "encoding": {
+          "x": {
+            "field": "col",
+            "type": "ordinal",
+            "axis": null
+          },
+          "y": {
+            "field": "row",
+            "type": "ordinal",
+            "axis": null,
+            "sort": "descending"
+          },
+          "color": {
+            "field": "status",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Uses AI",
+                "Does not use AI"
+              ],
+              "range": [
+                "#6a3fd6",
+                "#dcd8e6"
+              ]
+            },
+            "legend": {
+              "title": null,
+              "orient": "top",
+              "direction": "horizontal"
+            }
+          },
+          "tooltip": [
+            {
+              "field": "size",
+              "title": "Business size"
+            },
+            {
+              "field": "staff",
+              "title": "Staff"
+            },
+            {
+              "field": "ai",
+              "title": "% using AI",
+              "format": ".1f"
+            }
+          ]
+        }
       },
-      "tooltip": [
-        {"field": "size", "title": "Business size"},
-        {"field": "staff", "title": "Staff"},
-        {"field": "ai", "title": "% using AI", "format": ".1f"}
-      ]
-    }
+      {
+        "transform": [
+          {
+            "filter": "datum.cell == 0 && datum.order == 3"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "fontSize": 11.5,
+          "fontStyle": "italic",
+          "fontWeight": 600,
+          "color": "#4b2aa0",
+          "lineHeight": 15,
+          "align": "center",
+          "baseline": "top"
+        },
+        "encoding": {
+          "text": {
+            "value": [
+              "Nearly double small firms:",
+              "the jump comes at 20+ staff"
+            ]
+          },
+          "x": {
+            "value": 75
+          },
+          "y": {
+            "value": 160
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.cell == 0 && datum.order == 4"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "fontSize": 11.5,
+          "fontStyle": "italic",
+          "fontWeight": 600,
+          "color": "#4b2aa0",
+          "lineHeight": 15,
+          "align": "center",
+          "baseline": "top"
+        },
+        "encoding": {
+          "text": {
+            "value": [
+              "3× as likely as",
+              "a micro business"
+            ]
+          },
+          "x": {
+            "value": 75
+          },
+          "y": {
+            "value": 160
+          }
+        }
+      }
+    ]
   }
 }

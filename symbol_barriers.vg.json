@@ -3,14 +3,32 @@
   "description": "Proportional symbol map: circle area = % of businesses reporting anything that limited their use of digital technology; colour = the most common barrier in that state/territory, 2024-25 (ABS).",
   "width": "container",
   "height": 420,
-  "projection": {"type": "conicEqualArea", "parallels": [-18, -36], "rotate": [-132, 0]},
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -132,
+      0
+    ]
+  },
   "layer": [
     {
       "data": {
         "url": "australia_states.topojson",
-        "format": {"type": "topojson", "feature": "states"}
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
       },
-      "mark": {"type": "geoshape", "fill": "#ebe8f1", "stroke": "#ffffff", "strokeWidth": 1.2}
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ebe8f1",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
+      }
     },
     {
       "data": {
@@ -18,9 +36,14 @@
         "format": {
           "type": "csv",
           "parse": {
-            "lon": "number", "lat": "number", "label_lon": "number", "label_lat": "number",
-            "barrier_skills": "number", "barrier_funds": "number",
-            "barrier_cost_benefit": "number", "barrier_understanding": "number",
+            "lon": "number",
+            "lat": "number",
+            "label_lon": "number",
+            "label_lat": "number",
+            "barrier_skills": "number",
+            "barrier_funds": "number",
+            "barrier_cost_benefit": "number",
+            "barrier_understanding": "number",
             "any_barrier": "number"
           }
         }
@@ -37,27 +60,70 @@
       ],
       "layer": [
         {
-          "transform": [{"filter": "datum.abbr == 'ACT'"}],
-          "mark": {"type": "rule", "color": "#6b6578", "strokeWidth": 1},
+          "transform": [
+            {
+              "filter": "datum.abbr == 'ACT'"
+            }
+          ],
+          "mark": {
+            "type": "rule",
+            "color": "#6b6578",
+            "strokeWidth": 1
+          },
           "encoding": {
-            "longitude": {"field": "lon", "type": "quantitative"},
-            "latitude": {"field": "lat", "type": "quantitative"},
-            "longitude2": {"field": "label_lon"},
-            "latitude2": {"field": "label_lat"}
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "longitude2": {
+              "field": "label_lon"
+            },
+            "latitude2": {
+              "field": "label_lat"
+            }
           }
         },
         {
-          "mark": {"type": "circle", "opacity": 0.88, "stroke": "#ffffff", "strokeWidth": 1.5},
+          "mark": {
+            "type": "circle",
+            "opacity": 0.88,
+            "stroke": "#ffffff",
+            "strokeWidth": 1.5
+          },
           "encoding": {
-            "longitude": {"field": "label_lon", "type": "quantitative"},
-            "latitude": {"field": "label_lat", "type": "quantitative"},
+            "longitude": {
+              "field": "label_lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "label_lat",
+              "type": "quantitative"
+            },
             "size": {
               "field": "any_barrier",
               "type": "quantitative",
-              "scale": {"domain": [0, 50], "range": [0, 3600], "zero": true},
+              "scale": {
+                "domain": [
+                  0,
+                  50
+                ],
+                "range": [
+                  0,
+                  3600
+                ],
+                "zero": true
+              },
               "legend": {
                 "title": "% held back by anything",
-                "values": [25, 35, 45],
+                "values": [
+                  25,
+                  35,
+                  45
+                ],
                 "symbolFillColor": "#c9c3d6",
                 "symbolStrokeColor": "#ffffff",
                 "orient": "right"
@@ -71,36 +137,131 @@
                   "Not enough staff skills",
                   "Unsure it is worth the cost",
                   "Not enough funds"
-        
                 ],
-                "range": ["#d9822b", "#2a8c8c", "#c2456b"]
+                "range": [
+                  "#d9822b",
+                  "#2a8c8c",
+                  "#c2456b"
+                ]
               },
-              "legend": {"title": "Biggest single barrier", "orient": "right"}
+              "legend": {
+                "title": "Biggest single barrier",
+                "orient": "right"
+              }
             },
             "tooltip": [
-              {"field": "state", "title": "State / territory"},
-              {"field": "any_barrier", "title": "% held back by any barrier", "format": ".1f"},
-              {"field": "top_barrier", "title": "Biggest barrier"},
-              {"field": "top_pct", "title": "% citing biggest barrier", "format": ".1f"},
-              {"field": "barrier_skills", "title": "Staff skills (%)"},
-              {"field": "barrier_cost_benefit", "title": "Unsure of cost/benefit (%)"},
-              {"field": "barrier_funds", "title": "Lack of funds (%)"},
-              {"field": "barrier_understanding", "title": "Unsure what they need (%)"}
+              {
+                "field": "state",
+                "title": "State / territory"
+              },
+              {
+                "field": "any_barrier",
+                "title": "% held back by any barrier",
+                "format": ".1f"
+              },
+              {
+                "field": "top_barrier",
+                "title": "Biggest barrier"
+              },
+              {
+                "field": "top_pct",
+                "title": "% citing biggest barrier",
+                "format": ".1f"
+              },
+              {
+                "field": "barrier_skills",
+                "title": "Staff skills (%)"
+              },
+              {
+                "field": "barrier_cost_benefit",
+                "title": "Unsure of cost/benefit (%)"
+              },
+              {
+                "field": "barrier_funds",
+                "title": "Lack of funds (%)"
+              },
+              {
+                "field": "barrier_understanding",
+                "title": "Unsure what they need (%)"
+              }
             ]
           }
         },
         {
-          "mark": {"type": "text", "fontSize": 11, "fontWeight": 700, "color": "#ffffff", "lineHeight": 13},
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "fontWeight": 700,
+            "color": "#ffffff",
+            "lineHeight": 13
+          },
           "encoding": {
-            "longitude": {"field": "label_lon", "type": "quantitative"},
-            "latitude": {"field": "label_lat", "type": "quantitative"},
-            "text": {"field": "label_text"}
+            "longitude": {
+              "field": "label_lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "label_lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label_text"
+            }
           },
           "transform": [
-            {"calculate": "[datum.abbr, format(datum.any_barrier, '.0f') + '%']", "as": "label_text"}
+            {
+              "calculate": "[datum.abbr, format(datum.any_barrier, '.0f') + '%']",
+              "as": "label_text"
+            }
           ]
         }
       ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 113.4,
+            "lat": -11.4,
+            "lines": [
+              "NT: the most businesses held back (45%),",
+              "yet the highest AI rate (18%)"
+            ]
+          },
+          {
+            "lon": 148.6,
+            "lat": -44.2,
+            "lines": [
+              "ACT: the fewest held back (27%),",
+              "but AI use is still low (9%)"
+            ]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 15,
+        "align": "left",
+        "baseline": "top"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lines"
+        }
+      }
     }
   ]
 }
+

@@ -228,6 +228,38 @@
           "value": "Finland leads"
         }
       }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.iso == 'ALB'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 10.5,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 13,
+        "align": "left",
+        "baseline": "top"
+      },
+      "encoding": {
+        "x": {
+          "datum": 42,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "Australia's small-to-large",
+            "gap (22 points) is the 7th",
+            "smallest of 33; the EU's",
+            "is 38. Its big firms are",
+            "what trail Europe."
+          ]
+        }
+      }
     }
   ]
 }

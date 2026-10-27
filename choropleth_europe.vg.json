@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Choropleth map of Europe: % of enterprises using AI in 2025, by size class (Eurostat), with Australia's figure for a similar size class (ABS) shown for comparison.",
   "width": "container",
-  "height": 470,
+  "height": 610,
   "params": [
     {
       "name": "band",
@@ -10,79 +10,240 @@
       "bind": {
         "input": "select",
         "name": "Business size: ",
-        "options": ["small", "medium", "large"],
-        "labels": ["Small (Europe 10–49 staff · Australia 5–19)", "Medium (Europe 50–249 · Australia 20–199)", "Large (Europe 250+ · Australia 200+)"]
+        "options": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "labels": [
+          "Small (Europe 10–49 staff · Australia 5–19)",
+          "Medium (Europe 50–249 · Australia 20–199)",
+          "Large (Europe 250+ · Australia 200+)"
+        ]
       }
     }
   ],
-  "projection": {"type": "azimuthalEqualArea", "rotate": [-10, -52]},
+  "projection": {
+    "type": "azimuthalEqualArea",
+    "rotate": [
+      -10,
+      -52
+    ]
+  },
   "layer": [
     {
       "data": {
         "url": "europe_countries.topojson",
-        "format": {"type": "topojson", "feature": "countries"}
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
       },
-      "mark": {"type": "geoshape", "fill": "#e4e0ea", "stroke": "#ffffff", "strokeWidth": 0.6}
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e4e0ea",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.6
+      }
     },
     {
       "data": {
         "url": "ai_international.csv",
-        "format": {"type": "csv", "parse": {"small": "number", "medium": "number", "large": "number"}}
+        "format": {
+          "type": "csv",
+          "parse": {
+            "small": "number",
+            "medium": "number",
+            "large": "number"
+          }
+        }
       },
       "transform": [
-        {"filter": "datum.source == 'Eurostat' && datum.iso != 'EU27'"},
-        {"calculate": "datum[band]", "as": "pct"},
-        {"filter": "isValid(datum.pct)"},
+        {
+          "filter": "datum.source == 'Eurostat' && datum.iso != 'EU27'"
+        },
+        {
+          "calculate": "datum[band]",
+          "as": "pct"
+        },
+        {
+          "filter": "isValid(datum.pct)"
+        },
         {
           "lookup": "iso",
           "from": {
-            "data": {"url": "europe_countries.topojson", "format": {"type": "topojson", "feature": "countries"}},
+            "data": {
+              "url": "europe_countries.topojson",
+              "format": {
+                "type": "topojson",
+                "feature": "countries"
+              }
+            },
             "key": "properties.iso"
           },
           "as": "geo"
         }
       ],
-      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.6},
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.6
+      },
       "encoding": {
-        "shape": {"field": "geo", "type": "geojson"},
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
         "color": {
           "field": "pct",
           "type": "quantitative",
-          "scale": {"scheme": "purples", "domain": [0, 80]},
-          "legend": {"title": "% of businesses using AI", "orient": "top-right", "direction": "horizontal", "gradientLength": 170}
+          "scale": {
+            "scheme": "purples",
+            "domain": [
+              0,
+              80
+            ]
+          },
+          "legend": {
+            "title": "% of businesses using AI",
+            "orient": "top-right",
+            "direction": "horizontal",
+            "gradientLength": 170
+          }
         },
         "tooltip": [
-          {"field": "country", "title": "Country"},
-          {"field": "pct", "title": "% of businesses using AI", "format": ".1f"}
+          {
+            "field": "country",
+            "title": "Country"
+          },
+          {
+            "field": "pct",
+            "title": "% of businesses using AI",
+            "format": ".1f"
+          }
         ]
       }
     },
     {
       "data": {
         "url": "ai_international.csv",
-        "format": {"type": "csv", "parse": {"small": "number", "medium": "number", "large": "number"}}
+        "format": {
+          "type": "csv",
+          "parse": {
+            "small": "number",
+            "medium": "number",
+            "large": "number"
+          }
+        }
       },
       "transform": [
-        {"filter": "datum.iso == 'AUS' || datum.iso == 'EU27'"},
-        {"calculate": "datum[band]", "as": "pct"},
-        {"calculate": "datum.iso == 'AUS' ? 0 : 1", "as": "row"}
+        {
+          "filter": "datum.iso == 'AUS' || datum.iso == 'EU27'"
+        },
+        {
+          "calculate": "datum[band]",
+          "as": "pct"
+        },
+        {
+          "calculate": "datum.iso == 'AUS' ? 0 : 1",
+          "as": "row"
+        }
       ],
       "encoding": {
-        "y": {"field": "row", "type": "ordinal", "scale": {"range": [72, 98]}, "axis": null}
+        "y": {
+          "field": "row",
+          "type": "ordinal",
+          "scale": {
+            "range": [
+              72,
+              98
+            ]
+          },
+          "axis": null
+        }
       },
       "layer": [
         {
-          "mark": {"type": "square", "x": {"expr": "width - 190"}, "size": 220, "opacity": 1, "stroke": "#1e1b2e", "strokeWidth": 1},
-          "encoding": {"color": {"field": "pct", "type": "quantitative"}}
+          "mark": {
+            "type": "square",
+            "x": {
+              "expr": "width - 190"
+            },
+            "size": 220,
+            "opacity": 1,
+            "stroke": "#1e1b2e",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "color": {
+              "field": "pct",
+              "type": "quantitative"
+            }
+          }
         },
         {
-          "transform": [{"calculate": "datum.country + (datum.iso == 'AUS' ? ' (ABS)' : '') + ': ' + format(datum.pct, '.1f') + '%'", "as": "label"}],
-          "mark": {"type": "text", "x": {"expr": "width - 190"}, "align": "left", "dx": 14, "fontSize": 13, "fontWeight": 600},
+          "transform": [
+            {
+              "calculate": "datum.country + (datum.iso == 'AUS' ? ' (ABS)' : '') + ': ' + format(datum.pct, '.1f') + '%'",
+              "as": "label"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "x": {
+              "expr": "width - 190"
+            },
+            "align": "left",
+            "dx": 14,
+            "fontSize": 13,
+            "fontWeight": 600
+          },
           "encoding": {
-            "text": {"field": "label"}
+            "text": {
+              "field": "label"
+            }
           }
         }
       ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": -24,
+            "lat": 43
+          }
+        ]
+      },
+      "transform": [
+        {
+          "calculate": "band == 'large' ? ['Australia\\'s large firms (35%) would', 'sit with Cyprus (35%) and Greece', '(38%), near the bottom of Europe'] : band == 'medium' ? ['Medium firms: Australia (22%) is', '8 points behind the EU (30%)'] : ['Small firms: Australia (12%) is only', '5 points behind the EU (17%)']",
+          "as": "lines"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 15,
+        "align": "left",
+        "baseline": "top"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lines"
+        }
+      }
     }
   ]
 }

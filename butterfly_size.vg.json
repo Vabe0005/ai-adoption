@@ -31,7 +31,7 @@
       ]
     },
     {
-      "calculate": "format(datum.users, '.0f') + '  (' + format(datum.users / datum.total_users, '.0%') + ' of all AI users)'",
+      "calculate": "datum.order == 4 ? format(datum.users, '.0f') + '  (2%): highest rate, fewest AI users' : format(datum.users, '.0f') + '  (' + format(datum.users / datum.total_users, '.0%') + ' of all AI users)'",
       "as": "users_label"
     }
   ],

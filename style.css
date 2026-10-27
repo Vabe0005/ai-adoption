@@ -288,3 +288,31 @@ strong.ai { color: var(--ai-dark); }
   border-left: 3px solid var(--ai);
   padding-left: 12px;
 }
+
+/* Two short text columns side by side (fills the width instead of one long line) */
+.text-pair { margin: 0 -12px 8px; }
+.text-pair > [class*="pure-u"] { padding: 0 12px; box-sizing: border-box; }
+.text-pair p { margin: 0 0 14px; }
+
+/* Two chart cards side by side with the same height */
+.chapter .pure-g.equal-cards { align-items: stretch; }
+.equal-cards > [class*="pure-u"] { display: flex; flex-direction: column; }
+.equal-cards .chart-card { flex: 1; display: flex; flex-direction: column; }
+.equal-cards .chart-card .chart-note { margin-top: auto; padding-top: 10px; }
+@media (max-width: 767px) { .text-pair { margin: 0 0 8px; } .text-pair > [class*="pure-u"] { padding: 0; } }
+
+/* Conclusion text + illustration */
+.concl-text { padding-right: 32px; box-sizing: border-box; }
+.concl-text .body-text { max-width: none; }
+.concl-img { display: block; width: 100%; max-width: 400px; height: auto; margin: 0 auto; }
+
+/* Notes and gutters for the Europe pair (3/5 + 2/5) */
+.text-pair p.how { font-size: 15px; color: var(--ink-soft); border-left: 3px solid var(--ai); padding-left: 12px; }
+.equal-cards > .pure-u-md-3-5 > .chart-card { margin-right: 12px; }
+.equal-cards > .pure-u-md-2-5 > .chart-card { margin-left: 12px; }
+@media (max-width: 767px) {
+  .concl-text { padding-right: 0; }
+  .concl-img { max-width: 300px; margin-top: 8px; }
+  .equal-cards > .pure-u-md-3-5 > .chart-card,
+  .equal-cards > .pure-u-md-2-5 > .chart-card { margin-left: 0; margin-right: 0; }
+}

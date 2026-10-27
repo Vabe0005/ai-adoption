@@ -3,7 +3,7 @@
   "description": "Diverging bar chart: how far each industry's AI use sits above or below the all-business average of 12.1%, 2024-25 (ABS).",
   "width": "container",
   "height": {
-    "step": 24
+    "step": 26
   },
   "data": {
     "url": "ict_by_industry.csv",
@@ -226,6 +226,83 @@
           "field": "label"
         }
       }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.industry == 'Mining'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 15,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "y": {
+          "field": "industry",
+          "type": "nominal",
+          "sort": {
+            "field": "diff",
+            "op": "max",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "datum": 10.5,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "← a hands-on industry, yet",
+            "6 points above average"
+          ]
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.industry == 'Retail'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 15,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "y": {
+          "field": "industry",
+          "type": "nominal",
+          "sort": {
+            "field": "diff",
+            "op": "max",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "datum": 1.5,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "Retail and hospitality: 66% use online",
+            "platforms, but only 9% and 5% use AI"
+          ]
+        }
+      }
     }
   ]
 }
+

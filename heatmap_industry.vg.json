@@ -185,6 +185,54 @@
           "value": 0.3
         }
       }
+    },
+    {
+      "transform": [
+        {
+          "filter": "(datum.industry == 'Agriculture' && datum.tech == 'iot') || (datum.industry == 'Mining' && datum.tech == 'data_analytics')"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "fill": null,
+        "stroke": "#1e1b2e",
+        "strokeWidth": 2.5,
+        "cornerRadius": 3
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 15,
+        "align": "left",
+        "baseline": "top"
+      },
+      "encoding": {
+        "text": {
+          "value": [
+            "Outlined: farms use sensors (IoT, 15%)",
+            "5× as much as AI (3%). Mining uses data",
+            "analytics (17%) almost as much as AI."
+          ]
+        },
+        "x": {
+          "value": 0
+        },
+        "y": {
+          "value": {
+            "expr": "height + 78"
+          }
+        }
+      }
     }
   ]
 }

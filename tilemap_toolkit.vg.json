@@ -247,6 +247,52 @@
           "field": "ai_text"
         }
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 2.05,
+            "y": 2.3,
+            "lines": [
+              "↑ SA: the lowest AI rate (8%),",
+              "though 78% of its businesses use cloud"
+            ]
+          },
+          {
+            "x": 2.12,
+            "y": 3.55,
+            "lines": [
+              "TAS: the only state where AI (17%)",
+              "beats CRM software (14%) →"
+            ]
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 15,
+        "align": "right",
+        "baseline": "top"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lines"
+        }
+      }
     }
   ]
 }
+

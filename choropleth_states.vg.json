@@ -226,6 +226,48 @@
           "as": "shade"
         }
       ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 113.4,
+            "lat": -11.4
+          }
+        ]
+      },
+      "transform": [
+        {
+          "filter": "tech == 'ai'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "fontWeight": 600,
+        "color": "#4b2aa0",
+        "lineHeight": 15,
+        "align": "left",
+        "baseline": "top"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "AI use in the NT (18%) is more than",
+            "double South Australia's (8%)"
+          ]
+        }
+      }
     }
   ]
 }
+
