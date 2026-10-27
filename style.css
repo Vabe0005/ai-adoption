@@ -270,3 +270,13 @@ strong.ai { color: var(--ai-dark); }
 .about ol, .about ul { padding-left: 20px; margin: 0; }
 .about li { font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
 .lead-first { margin-top: 40px; }
+
+/* ============ Opening paragraphs + illustration ============ */
+.intro { align-items: center; margin-top: 40px; }
+.intro .lead { max-width: none; padding-right: 32px; }
+.intro .lead-first { margin-top: 0; }
+.intro-img { display: block; width: 100%; max-width: 400px; height: auto; margin: 0 auto; }
+@media (max-width: 767px) {
+  .intro .lead { padding-right: 0; }
+  .intro-img { max-width: 300px; margin-top: 8px; }
+}

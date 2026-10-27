@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 340" role="img" aria-labelledby="t d">
+  <title id="t">Switched on</title>
+  <desc id="d">A light switch flicked on, glowing purple, beside a grid of 100 squares in which 12 are lit: 12 in every 100 Australian businesses use AI.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6a3fd6" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="#6a3fd6" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6a3fd6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ece8f4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 10 x 10 grid: 12 lit squares = 12% of businesses -->
+  <g transform="translate(222,62)">
+    <g fill="#e4e0ea">
+      <rect x="0" y="0" width="16" height="16" rx="3"/><rect x="19" y="0" width="16" height="16" rx="3"/><rect x="38" y="0" width="16" height="16" rx="3"/><rect x="57" y="0" width="16" height="16" rx="3"/><rect x="76" y="0" width="16" height="16" rx="3"/><rect x="95" y="0" width="16" height="16" rx="3"/><rect x="114" y="0" width="16" height="16" rx="3"/><rect x="133" y="0" width="16" height="16" rx="3"/><rect x="152" y="0" width="16" height="16" rx="3"/><rect x="171" y="0" width="16" height="16" rx="3"/>
+      <rect x="0" y="19" width="16" height="16" rx="3"/><rect x="19" y="19" width="16" height="16" rx="3"/><rect x="38" y="19" width="16" height="16" rx="3"/><rect x="57" y="19" width="16" height="16" rx="3"/><rect x="76" y="19" width="16" height="16" rx="3"/><rect x="95" y="19" width="16" height="16" rx="3"/><rect x="114" y="19" width="16" height="16" rx="3"/><rect x="133" y="19" width="16" height="16" rx="3"/><rect x="152" y="19" width="16" height="16" rx="3"/><rect x="171" y="19" width="16" height="16" rx="3"/>
+      <rect x="0" y="38" width="16" height="16" rx="3"/><rect x="19" y="38" width="16" height="16" rx="3"/><rect x="38" y="38" width="16" height="16" rx="3"/><rect x="57" y="38" width="16" height="16" rx="3"/><rect x="76" y="38" width="16" height="16" rx="3"/><rect x="95" y="38" width="16" height="16" rx="3"/><rect x="114" y="38" width="16" height="16" rx="3"/><rect x="133" y="38" width="16" height="16" rx="3"/><rect x="152" y="38" width="16" height="16" rx="3"/><rect x="171" y="38" width="16" height="16" rx="3"/>
+      <rect x="0" y="57" width="16" height="16" rx="3"/><rect x="19" y="57" width="16" height="16" rx="3"/><rect x="38" y="57" width="16" height="16" rx="3"/><rect x="57" y="57" width="16" height="16" rx="3"/><rect x="76" y="57" width="16" height="16" rx="3"/><rect x="95" y="57" width="16" height="16" rx="3"/><rect x="114" y="57" width="16" height="16" rx="3"/><rect x="133" y="57" width="16" height="16" rx="3"/><rect x="152" y="57" width="16" height="16" rx="3"/><rect x="171" y="57" width="16" height="16" rx="3"/>
+      <rect x="0" y="76" width="16" height="16" rx="3"/><rect x="19" y="76" width="16" height="16" rx="3"/><rect x="38" y="76" width="16" height="16" rx="3"/><rect x="57" y="76" width="16" height="16" rx="3"/><rect x="76" y="76" width="16" height="16" rx="3"/><rect x="95" y="76" width="16" height="16" rx="3"/><rect x="114" y="76" width="16" height="16" rx="3"/><rect x="133" y="76" width="16" height="16" rx="3"/><rect x="152" y="76" width="16" height="16" rx="3"/><rect x="171" y="76" width="16" height="16" rx="3"/>
+      <rect x="0" y="95" width="16" height="16" rx="3"/><rect x="19" y="95" width="16" height="16" rx="3"/><rect x="38" y="95" width="16" height="16" rx="3"/><rect x="57" y="95" width="16" height="16" rx="3"/><rect x="76" y="95" width="16" height="16" rx="3"/><rect x="95" y="95" width="16" height="16" rx="3"/><rect x="114" y="95" width="16" height="16" rx="3"/><rect x="133" y="95" width="16" height="16" rx="3"/><rect x="152" y="95" width="16" height="16" rx="3"/><rect x="171" y="95" width="16" height="16" rx="3"/>
+      <rect x="0" y="114" width="16" height="16" rx="3"/><rect x="19" y="114" width="16" height="16" rx="3"/><rect x="38" y="114" width="16" height="16" rx="3"/><rect x="57" y="114" width="16" height="16" rx="3"/><rect x="76" y="114" width="16" height="16" rx="3"/><rect x="95" y="114" width="16" height="16" rx="3"/><rect x="114" y="114" width="16" height="16" rx="3"/><rect x="133" y="114" width="16" height="16" rx="3"/><rect x="152" y="114" width="16" height="16" rx="3"/><rect x="171" y="114" width="16" height="16" rx="3"/>
+      <rect x="0" y="133" width="16" height="16" rx="3"/><rect x="19" y="133" width="16" height="16" rx="3"/><rect x="38" y="133" width="16" height="16" rx="3"/><rect x="57" y="133" width="16" height="16" rx="3"/><rect x="76" y="133" width="16" height="16" rx="3"/><rect x="95" y="133" width="16" height="16" rx="3"/><rect x="114" y="133" width="16" height="16" rx="3"/><rect x="133" y="133" width="16" height="16" rx="3"/>
+      <rect x="152" y="133" width="16" height="16" rx="3"/><rect x="171" y="133" width="16" height="16" rx="3"/>
+    </g>
+    <!-- bottom two rows: 12 lit -->
+    <g fill="#6a3fd6">
+      <rect x="0" y="152" width="16" height="16" rx="3"/><rect x="19" y="152" width="16" height="16" rx="3"/>
+      <rect x="0" y="171" width="16" height="16" rx="3"/><rect x="19" y="171" width="16" height="16" rx="3"/><rect x="38" y="171" width="16" height="16" rx="3"/><rect x="57" y="171" width="16" height="16" rx="3"/><rect x="76" y="171" width="16" height="16" rx="3"/><rect x="95" y="171" width="16" height="16" rx="3"/><rect x="114" y="171" width="16" height="16" rx="3"/><rect x="133" y="171" width="16" height="16" rx="3"/><rect x="152" y="171" width="16" height="16" rx="3"/><rect x="171" y="171" width="16" height="16" rx="3"/>
+    </g>
+    <g fill="#e4e0ea">
+      <rect x="38" y="152" width="16" height="16" rx="3"/><rect x="57" y="152" width="16" height="16" rx="3"/><rect x="76" y="152" width="16" height="16" rx="3"/><rect x="95" y="152" width="16" height="16" rx="3"/><rect x="114" y="152" width="16" height="16" rx="3"/><rect x="133" y="152" width="16" height="16" rx="3"/><rect x="152" y="152" width="16" height="16" rx="3"/><rect x="171" y="152" width="16" height="16" rx="3"/>
+    </g>
+  </g>
+
+  <!-- wire from the switch into the lit squares -->
+  <path d="M 150 248 C 190 248, 196 245, 222 242" fill="none" stroke="#6a3fd6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="150" cy="248" r="5" fill="#6a3fd6"/>
+
+  <!-- glow -->
+  <circle cx="98" cy="170" r="96" fill="url(#glow)"/>
+
+  <!-- switch plate -->
+  <rect x="48" y="78" width="100" height="184" rx="18" fill="url(#plate)" stroke="#cfc8e3" stroke-width="2"/>
+  <circle cx="98" cy="96" r="3.5" fill="#cfc8e3"/>
+  <circle cx="98" cy="244" r="3.5" fill="#cfc8e3"/>
+  <!-- rocker: top half pressed = ON -->
+  <rect x="70" y="112" width="56" height="116" rx="10" fill="#1e1b2e"/>
+  <rect x="74" y="116" width="48" height="54" rx="7" fill="#6a3fd6"/>
+  <rect x="74" y="172" width="48" height="52" rx="7" fill="#2c2840"/>
+  <text x="98" y="149" text-anchor="middle" font-family="IBM Plex Mono, Menlo, monospace" font-size="15" font-weight="600" fill="#ffffff">ON</text>
+
+  <!-- caption -->
+  <text x="222" y="278" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="600" fill="#4b2aa0" letter-spacing="0.5">12 IN EVERY 100</text>
+  <text x="222" y="296" font-family="IBM Plex Sans, Helvetica, Arial, sans-serif" font-size="13" fill="#4a4458">Australian businesses use AI</text>
+</svg>
